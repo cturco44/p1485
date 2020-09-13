@@ -32,7 +32,7 @@ def main(input_dir, output, verbose):
         output_path = output_dir/url
         if output != "":
             output_path = pathlib.Path(output)
-        output_file = output_path / "index.html"
+        output_file = output_path / item["template"]
 
         try:
             output_path.mkdir(parents=True)
@@ -47,11 +47,11 @@ def main(input_dir, output, verbose):
                 print("Copied " + str(input_dir/"static") + " -> " + str(output_path))
         env = jinja2.Environment(loader=jinja2.FileSystemLoader(str(template_dir)),
                                  autoescape=jinja2.select_autoescape(['html', 'xml']),)
-        template = env.get_template('index.html')
+        template = env.get_template(item["template"])
         output_file.write_text(template.render(item['context']))
 
         if verbose:
-            print("Rendered index.html -> " + str(output_file))
+            print("Rendered " + item["template"] + " -> " + str(output_file))
 
 
 
