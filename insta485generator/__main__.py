@@ -1,9 +1,10 @@
 """Build static HTML site from directory of HTML templates and plain files."""
 import pathlib
-import click
 import json
+from distutils.dir_util import copy_tree as copyer
+import sys
+import click
 import jinja2
-
 
 @click.command()
 @click.argument('INPUT_DIR')
@@ -13,8 +14,6 @@ import jinja2
 def main(input_dir, output, verbose):
     """Templated static website generator."""
     #Don't forget to use verbose and input path
-    if output == "":
-        output = input_dir
     json_path = pathlib.Path(input_dir) / "config.json"
 
     #Open JSON File
@@ -23,34 +22,36 @@ def main(input_dir, output, verbose):
             data = json.load(file)
         except ValueError:
             print("JSON ERROR")
-            exit(1)
-    
+            sys.exit(1)
     for item in data:
         #Determine output path
         url = item["url"].lstrip("/")  # remove leading slash
         input_dir = pathlib.Path(input_dir)  # convert str to Path object
         template_dir = input_dir / "templates"
         output_dir = input_dir/"html"  # default, can be changed with --output option
-        output_path = input_dir/url
+        output_path = output_dir/url
         if output != "":
             output_path = pathlib.Path(output)
         output_file = output_path / "index.html"
 
         try:
-            output_path.mkdir(parents = True)
+            output_path.mkdir(parents=True)
             output_file.touch()
 
         except FileExistsError:
             print("Directory already exists")
-            exit(1)
-        
-        env = jinja2.Environment(loader=jinja2.FileSystemLoader(str(template_dir)), autoescape=jinja2.select_autoescape(['html', 'xml']),)
+            sys.exit(1)
+        if (input_dir/"static").exists():
+            copyer(str(input_dir/"static"), str(output_dir))
+            if verbose:
+                print("Copied " + str(input_dir/"static") + " -> " + str(output_path))
+        env = jinja2.Environment(loader=jinja2.FileSystemLoader(str(template_dir)),
+                                 autoescape=jinja2.select_autoescape(['html', 'xml']),)
         template = env.get_template('index.html')
         output_file.write_text(template.render(item['context']))
 
         if verbose:
             print("Rendered index.html -> " + str(output_file))
-        
 
 
 
