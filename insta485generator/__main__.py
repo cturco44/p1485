@@ -2,6 +2,7 @@
 import pathlib
 import click
 import json
+import jinja2
 
 
 @click.command()
@@ -29,17 +30,25 @@ def main(input_dir, output, verbose):
         #Determine output path
         url = item["url"].lstrip("/")  # remove leading slash
         input_dir = pathlib.Path(output)  # convert str to Path object
+        template_dir = input_dir / "templates"
         output_dir = input_dir/"html"  # default, can be changed with --output option
         output_path = output_dir/url
+        output_file = output_path / "index.html"
 
         try:
             output_path.mkdir(parents = True)
-            (output_path / "index.html").touch()
+            output_file.touch()
 
         except FileExistsError:
             print("Directory already exists")
             exit(1)
         
+        env = jinja2.Environment(loader=jinja2.FileSystemLoader(str(template_dir)), autoescape=jinja2.select_autoescape(['html', 'xml']),)
+        template = env.get_template('index.html')
+        output_file.write_text(template.render(item['context']))
+
+
+
         
 
 
