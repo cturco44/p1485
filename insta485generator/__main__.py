@@ -25,14 +25,15 @@ def main(input_dir, output, verbose):
             print("JSON ERROR")
             exit(1)
     
-    print(verbose)
     for item in data:
         #Determine output path
         url = item["url"].lstrip("/")  # remove leading slash
-        input_dir = pathlib.Path(output)  # convert str to Path object
+        input_dir = pathlib.Path(input_dir)  # convert str to Path object
         template_dir = input_dir / "templates"
         output_dir = input_dir/"html"  # default, can be changed with --output option
-        output_path = output_dir/url
+        output_path = input_dir/url
+        if output != "":
+            output_path = pathlib.Path(output)
         output_file = output_path / "index.html"
 
         try:
@@ -47,13 +48,11 @@ def main(input_dir, output, verbose):
         template = env.get_template('index.html')
         output_file.write_text(template.render(item['context']))
 
-
-
+        if verbose:
+            print("Rendered index.html -> " + str(output_file))
         
 
 
-
-        print(output_path)
 
 
 
