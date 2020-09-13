@@ -1,5 +1,7 @@
 """Build static HTML site from directory of HTML templates and plain files."""
+import pathlib
 import click
+
 
 @click.command()
 @click.argument('INPUT_DIR')
@@ -8,14 +10,11 @@ import click
 
 def main(input_dir, output, verbose):
     """Templated static website generator."""
+    #Don't forget to use verbose and input path
     if output == "":
         output = input_dir
-    print(input_dir)
-    print(output)
-    print(verbose)
-
+    input_path = pathlib.Path.cwd() / input_dir / "templates" / "index.html"
 
 
 if __name__ == "__main__":
     main()
-    
