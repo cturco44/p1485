@@ -5,12 +5,12 @@
     </head>
     <body>
         <p><a href="/">home page</a></p>
-        <p style="text-align:right;"><a href="/explore/">explore</a></p>
-        <p style="text-align:right;"><a href="/u/{{logname}}/">{{logname}}</a></p>
+        <p style="text-align:right;"><a href="/explore/explore.html">explore</a></p>
+        <p style="text-align:right;"><a href="/u/{{logname}}/user.html">{{logname}}</a></p>
 
         {% for post in posts %}
-            <a href="/u/{{post.owner}}/">{{post.owner}}</a>
-            <a href = "/p/{{post.postid}}/" style ="text-align: right;">{{post.timestamp}}</a>
+            <a href="/u/{{post.owner}}/user.html">{{post.owner}}</a>
+            <a href = "/p/{{post.postid}}/post.html" style ="text-align: right;">{{post.timestamp}}</a>
             <br>
 
             <img src="{{post.img_url}}">
@@ -23,7 +23,7 @@
             </p>
 
             {% for comment in post.comments %}
-                <p><a href="/u/{{comment.owner}}/">{{comment.owner}}</a> <span>{{comment.text}}</span></p>
+                <p><a href="/u/{{comment.owner}}/user.html">{{comment.owner}}</a> <span>{{comment.text}}</span></p>
 
 
             {%- endfor %}
