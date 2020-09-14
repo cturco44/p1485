@@ -6,20 +6,43 @@
     <body>
         <p><a href="/">home page</a></p>
         <p style="text-align:right;"><a href="/explore/">explore</a></p>
-        <p style="text-align:right;"><a href="/u/awdeorio/">awdeorio</a></p>
+        <p style="text-align:right;"><a href="/u/{{logname}}">{{logname}}</a></p>
 
-        <h1>awdeorio</h1>
+        <h1>{{username}}</h1>
+        <p>
+            {% if logname_follows_username %}
+                following
+            {% else %}
+                not following
+            {% endif %}
+        </p>
         <h2>
-            <span>2 posts</span>
+            <span>
+                {% if total_posts == 1 %}
+                    {{total_posts}} post
+                {% else %}
+                    {{total_posts}} total posts
+                {% endif %}
+
+            </span>
             <span> </span>
-            <span><a href="/u/awdeorio/followers/">2 followers</a></span>
+            <span><a href="/u/{{username}}/followers/">
+                {% if followers == 1 %}
+                    1 follower
+                {% else %}
+                    {{followers}} followers
+                {% endif %}
+            
+            </a></span>
             <span> </span>
-            <span><a href="/u/awdeorio/following/">2 following</a></span>
+            <span><a href="/u/{{username}}/following/">{{following}} following</a></span>
         </h2>
 
-        <h2>Andrew DeOrio</h2>
-        <a href="/p/1/"><img src="/uploads/122a7d27ca1d7420a1072f695d9290fad4501a41.jpg" alt="post1"></a>
-        <a href="/p/3/"><img src="/uploads/9887e06812ef434d291e4936417d125cd594b38a.jpg" alt="post3"></a>
+        <h2>{{fullname}}</h2>
+        {% for post in posts %}
+            <a href="/p/{{post.postid}}/"><img src="{{post.img_url}}"></a>
+        {%- endfor %}
+        
 
     </body>
 </html>
