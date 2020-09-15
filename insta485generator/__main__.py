@@ -35,7 +35,7 @@ def main(input_dir, output, verbose):
         output_file = output_path / item["template"]
 
         try:
-            output_path.mkdir(parents=True)
+            output_path.mkdir(parents=True, exist_ok=False)
             output_file.touch()
 
         except FileExistsError:

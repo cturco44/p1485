@@ -13,9 +13,12 @@ import bs4
 import utils
 from utils import TMPDIR
 
+import pdb
+
 
 def test_files():
     """Verify all expected files exist."""
+    breakpoint()
     tmpdir = TMPDIR/"insta485_html"
     shutil.rmtree(tmpdir, ignore_errors=True)
     subprocess.run(["insta485generator", "insta485", "-o", tmpdir], check=True)
