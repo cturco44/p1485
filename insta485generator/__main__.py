@@ -29,17 +29,20 @@ def main(input_dir, output, verbose):
         input_dir = pathlib.Path(input_dir)  # convert str to Path object
         template_dir = input_dir / "templates"
         output_dir = input_dir/"html"  # default, can be changed with --output option
-        output_path = output_dir/url
         if output != "":
-            output_path = pathlib.Path(output)
+            output_dir = pathlib.Path(output)
+        output_path = output_dir/url
         output_file = output_path / "index.html"
 
         try:
             output_path.mkdir(parents=True, exist_ok=False)
-            output_file.touch()
-
         except FileExistsError:
             print("Directory already exists")
+            sys.exit(1)
+        try:
+            output_file.touch()
+        except FileExistsError:
+            print("File already exists")
             sys.exit(1)
         if (input_dir/"static").exists():
             copyer(str(input_dir/"static"), str(output_dir))
