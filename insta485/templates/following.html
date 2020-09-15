@@ -9,17 +9,18 @@
         <p style="text-align:right;"><a href="/u/{{logname}}/">{{logname}}</a></p>
         <h1>Following</h1>
         {% for follower in following %}
-            {% if follower.username != logname %}
-                <p><img src="{{follower.user_img_url}}", style="width:100px;height:100px;"></p>
-                <p><a href = "/u/{{follower.username}}/">{{follower.username}}</a></p>
-                <p>
-                {% if follower.logname_follows_username %}
-                    following
-                {% else %}
-                    not following
-                {% endif %}
-                </p>
+            
+            <p><img src="{{follower.user_img_url}}", style="width:100px;height:100px;"></p>
+            <p><a href = "/u/{{follower.username}}/">{{follower.username}}</a></p>
+            <p>
+            {% if follower.logname_follows_username %}
+                following
+            {% elif follower.username == logname %}
+            {% else %}
+                not following
             {% endif %}
+            </p>
+            
             
 
         {%- endfor %}
