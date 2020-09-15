@@ -5,8 +5,8 @@
     </head>
     <body>
         <p><a href="/">home page</a></p>
-        <p style="text-align:right;"><a href="/explore.html">explore</a></p>
-        <p style="text-align:right;"><a href="/u/{{logname}}">{{logname}}</a></p>
+        <p style="text-align:right;"><a href="/explore/explore.html">explore</a></p>
+        <p style="text-align:right;"><a href="/u/{{logname}}/user.html">{{logname}}</a></p>
 
         <h1>{{username}}</h1>
         <p>
@@ -26,7 +26,7 @@
 
             </span>
             <span> </span>
-            <span><a href="/u/{{username}}/followers/">
+            <span><a href="/u/{{username}}/followers/followers.html">
                 {% if followers == 1 %}
                     1 follower
                 {% else %}
@@ -35,12 +35,12 @@
             
             </a></span>
             <span> </span>
-            <span><a href="/u/{{username}}/following/">{{following}} following</a></span>
+            <span><a href="/u/{{username}}/following/following.html">{{following}} following</a></span>
         </h2>
 
         <h2>{{fullname}}</h2>
         {% for post in posts %}
-            <a href="/p/{{post.postid}}/"><img src="{{post.img_url}}"></a>
+            <a href="/p/{{post.postid}}/post.html"><img src="{{post.img_url}}"></a>
         {%- endfor %}
         
 

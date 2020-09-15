@@ -4,12 +4,13 @@
         <title>insta485</title>
     </head>
     <body>
-        <p style="text-align:right;"><a href="/explore.html">explore</a></p>
-        <p style="text-align:right;"><a href="/u/{{logname}}/">{{logname}}</a></p>
+        <p><a href="/">home page</a></p>
+        <p style="text-align:right;"><a href="/explore/explore.html">explore</a></p>
+        <p style="text-align:right;"><a href="/u/{{logname}}/user.html">{{logname}}</a></p>
 
         
-        <a href="/u/{{owner}}/">{{owner}}</a>
-        <a href = "/p/{{postid}}/" style ="text-align: right;">{{timestamp}}</a>
+        <a href="/u/{{owner}}/user.html">{{owner}}</a>
+        <a href = "/p/{{postid}}/post.html" style ="text-align: right;">{{timestamp}}</a>
         <br>
 
         <img src="{{img_url}}">
@@ -22,7 +23,7 @@
         </p>
 
         {% for comment in comments %}
-            <p><a href="/u/{{comment.owner}}/">{{comment.owner}}</a> <span>{{comment.text}}</span></p>
+            <p><a href="/u/{{comment.owner}}/user.html">{{comment.owner}}</a> <span>{{comment.text}}</span></p>
 
 
         {%- endfor %}
