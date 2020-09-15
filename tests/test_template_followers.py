@@ -12,13 +12,11 @@ from pathlib import Path
 import bs4
 import utils
 from utils import TMPDIR
-
 import pdb
 
 
 def test_files():
     """Verify all expected files exist."""
-    breakpoint()
     tmpdir = TMPDIR/"insta485_html"
     shutil.rmtree(tmpdir, ignore_errors=True)
     subprocess.run(["insta485generator", "insta485", "-o", tmpdir], check=True)
@@ -42,6 +40,7 @@ def test_awdeorio_followers():
     text = re.sub(r"\s+", " ", text)
     links = [x.get("href") for x in soup.find_all("a")]
     srcs = [x.get("src") for x in soup.find_all('img')]
+    breakpoint()
 
     # Every page should have these
     assert "/" in links
