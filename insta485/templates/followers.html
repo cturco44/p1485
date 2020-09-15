@@ -10,7 +10,7 @@
         <h1>Followers</h1>
         {% for follower in followers %}
             
-            <p><img src="{{follower.user_img_url}}", style="width:100px;height:100px;"></p>
+            <p><img src="{{follower.user_img_url}}" style="width:100px;height:100px;" alt="profile picture"></p>
             <p><a href = "/u/{{follower.username}}/">{{follower.username}}</a></p>
             <p>
             {% if follower.logname_follows_username %}
