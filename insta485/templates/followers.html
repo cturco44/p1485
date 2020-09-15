@@ -5,13 +5,13 @@
     </head>
     <body>
         <p><a href="/">home page</a></p>
-        <p style="text-align:right;"><a href="/explore/explore.html">explore</a></p>
-        <p style="text-align:right;"><a href="/u/{{logname}}/user.html">{{logname}}</a></p>
+        <p style="text-align:right;"><a href="/explore/index.html">explore</a></p>
+        <p style="text-align:right;"><a href="/u/{{logname}}/index.html">{{logname}}</a></p>
         <h1>Followers</h1>
         {% for follower in followers %}
             {% if follower.username != logname %}
                 <p><img src="{{follower.user_img_url}}", style="width:100px;height:100px;"></p>
-                <p><a href = "/u/{{follower.username}}/user.html">{{follower.username}}</a></p>
+                <p><a href = "/u/{{follower.username}}/index.html">{{follower.username}}</a></p>
                 <p>
                 {% if follower.logname_follows_username %}
                     following

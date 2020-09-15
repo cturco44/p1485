@@ -32,7 +32,7 @@ def main(input_dir, output, verbose):
         output_path = output_dir/url
         if output != "":
             output_path = pathlib.Path(output)
-        output_file = output_path / item["template"]
+        output_file = output_path / "index.html"
 
         try:
             output_path.mkdir(parents=True, exist_ok=False)

@@ -5,12 +5,12 @@
     </head>
     <body>
         <p><a href="/">home page</a></p>
-        <p style="text-align:right;"><a href="/explore/explore.html">explore</a></p>
-        <p style="text-align:right;"><a href="/u/{{logname}}/user.html">{{logname}}</a></p>
+        <p style="text-align:right;"><a href="/explore/index.html">explore</a></p>
+        <p style="text-align:right;"><a href="/u/{{logname}}/index.html">{{logname}}</a></p>
         <h1>Discover People</h1>
         {% for new in not_following %}
             <p><img src="{{new.user_img_url}}", style="width:100px;height:100px;"></p>
-            <p><a href="/u/{{new.username}}/user.html">{{new.username}}</a></p>
+            <p><a href="/u/{{new.username}}/index.html">{{new.username}}</a></p>
 
         {%- endfor %}
 
