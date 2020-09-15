@@ -9,6 +9,7 @@
         <p style="text-align:right;"><a href="/u/{{logname}}/">{{logname}}</a></p>
 
         {% for post in posts %}
+            <p><a href ="/u/{{post.owner}}/"><img src="{{post.owner_img_url}}", style="width:100px;height:100px;"></a></p>
             <a href="/u/{{post.owner}}/">{{post.owner}}</a>
             <a href = "/p/{{post.postid}}/" style ="text-align: right;">{{post.timestamp}}</a>
             <br>
